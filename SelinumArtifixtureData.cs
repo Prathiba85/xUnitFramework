@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using AutoFixture.Xunit2;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -65,9 +66,23 @@ namespace XUnitDemo
             driver.FindElement(By.Id("Email")).SendKeys(model.Email);
 
             //Autofixtures other options
+           
+        }
 
 
-            
+        [Theory, AutoData]
+        public void TestRegisterUserwithAutodata(RegisterUserModel model)
+        {
+            var driver = webDriverFixture.ChromeDriver;
+            webDriverFixture.ChromeDriver.Navigate().GoToUrl("http://eaapp.somee.com");
+
+            driver.FindElement(By.LinkText("Register")).Click();
+            driver.FindElement(By.Id("UserName")).SendKeys(model.Name);
+            driver.FindElement(By.Id("Password")).SendKeys(model.Password);
+            driver.FindElement(By.Id("ConfirmPassword")).SendKeys(model.Password);
+            driver.FindElement(By.Id("Email")).SendKeys(model.Email);
+             //Autofixtures other options
+
         }
     }
 }
